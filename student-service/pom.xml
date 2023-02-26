@@ -47,6 +47,13 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>${spring.cloud.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-client -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <version>${spring.cloud.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
