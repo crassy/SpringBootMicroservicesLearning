@@ -1,6 +1,7 @@
 package balu.sbms.studentservice.service;
 
 import balu.sbms.studentservice.entity.Student;
+import balu.sbms.studentservice.feignclients.AddressFeignClient;
 import balu.sbms.studentservice.repository.StudentRepository;
 import balu.sbms.studentservice.request.StudentRequest;
 import balu.sbms.studentservice.response.AddressResponse;
@@ -19,6 +20,9 @@ public class StudentService {
     @Autowired
     WebClient webClient;
 
+    @Autowired
+    AddressFeignClient addressFeignClient;
+
     public StudentResponse createStudentResponse(StudentRequest studentRequest){
         Student student = new Student();
         student.setFirstName(studentRequest.getFirstName());
@@ -29,8 +33,8 @@ public class StudentService {
         student = studentRepository.save(student);
 
         StudentResponse studentResponse = new StudentResponse(student);
-        studentResponse.setAddressResponse(getAddressById(student.getAddress()));
-
+//        studentResponse.setAddressResponse(getAddressById(student.getAddress()));
+        studentResponse.setAddressResponse(addressFeignClient.getById(student.getAddress()));
 
         return studentResponse;
     }
@@ -39,7 +43,8 @@ public class StudentService {
         Student student = studentRepository.findById(id).get();
 
         StudentResponse studentResponse = new StudentResponse(student);
-        studentResponse.setAddressResponse(getAddressById(student.getAddress()));
+//        studentResponse.setAddressResponse(getAddressById(student.getAddress()));
+        studentResponse.setAddressResponse(addressFeignClient.getById(student.getAddress()));
         return studentResponse;
     }
 
