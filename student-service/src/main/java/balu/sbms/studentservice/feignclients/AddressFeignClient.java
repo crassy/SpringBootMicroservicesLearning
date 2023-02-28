@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 //    AddressResponse getById(@PathVariable long id);
 //}
 
-@FeignClient(value = "address-service", path = "/api/address")
+@FeignClient(value = "api-gateway")
 public interface AddressFeignClient {
-    @GetMapping("/getById/{id}")
+    @GetMapping("/address-service/api/address/getById/{id}")
     AddressResponse getById(@PathVariable long id);
 }
 
